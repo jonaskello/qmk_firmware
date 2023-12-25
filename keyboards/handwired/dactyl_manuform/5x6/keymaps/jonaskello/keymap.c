@@ -17,6 +17,12 @@ enum dactyl_layers {
 #define OPEN   LGUI(KC_P)
 #define KC_QSM LSFT(SE_PLUS)
 
+// Configure the global tapping term (default: 200ms)
+#define TAPPING_TERM 200
+
+// Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
+#define QUICK_TAP_TERM 0
+
 // Left-hand home row mods
 #define HOME_A LGUI_T(KC_A)
 #define HOME_S LALT_T(KC_S)
