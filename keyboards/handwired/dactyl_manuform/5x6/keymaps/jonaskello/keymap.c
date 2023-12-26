@@ -3,11 +3,7 @@
 #include QMK_KEYBOARD_H
 #include "keymap_swedish.h"
 
-enum dactyl_layers {
-  _QWERTY,
-  _LOWER,
-  _RAISE,
-};
+#include "features/achordion.h"
 
 #define RAISE  MO(_RAISE)
 #define LOWER  MO(_LOWER)
@@ -28,6 +24,46 @@ enum dactyl_layers {
 #define HOME_K RSFT_T(KC_K)
 #define HOME_L LALT_T(KC_L)
 #define HOME_OD RGUI_T(SE_ODIA)
+
+#define ACHORDION_STREAK
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+  if (!process_achordion(keycode, record)) { return false; }
+  // Your macros ...
+
+  return true;
+}
+
+void matrix_scan_user(void) {
+  achordion_task();
+}
+
+bool achordion_chord(uint16_t tap_hold_keycode,
+                     keyrecord_t* tap_hold_record,
+                     uint16_t other_keycode,
+                     keyrecord_t* other_record) {
+  // Exceptionally consider the following chords as holds, even though they
+  // are on the same hand.
+  switch (tap_hold_keycode) {
+    case HOME_F:  // CTRL+A, CTRL+S
+      if (other_keycode == HOME_A || other_keycode == HOME_A || other_keycode == KC_Z
+          || other_keycode == KC_X || other_keycode == KC_C || other_keycode == KC_V) { return true; }
+      break;
+  }
+
+  // Also allow same-hand holds when the other key is in the rows below the
+  // alphas. I need the `% (MATRIX_ROWS / 2)` because my keyboard is split.
+  if (other_record->event.key.row % (MATRIX_ROWS / 2) >= 4) { return true; }
+
+  // Otherwise, follow the opposite hands rule.
+  return achordion_opposite_hands(tap_hold_record, other_record);
+}
+
+enum dactyl_layers {
+  _QWERTY,
+  _LOWER,
+  _RAISE,
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
