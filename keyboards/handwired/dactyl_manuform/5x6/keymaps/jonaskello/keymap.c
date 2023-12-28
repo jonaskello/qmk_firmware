@@ -3,6 +3,7 @@
 #include QMK_KEYBOARD_H
 #include "keymap_swedish.h"
 
+// aaöööhttps://getreuer.info/posts/keyboards/achordion/index.html
 #include "features/achordion.h"
 
 #define RAISE  MO(_RAISE)
@@ -59,6 +60,19 @@ bool achordion_chord(uint16_t tap_hold_keycode,
   return achordion_opposite_hands(tap_hold_record, other_record);
 }
 
+bool achordion_eager_mod(uint8_t mod) {
+  switch (mod) {
+    case MOD_LSFT:
+    case MOD_RSFT:
+    case MOD_LCTL:
+    case MOD_RCTL:
+      return true;  // Eagerly apply Shift and Ctrl mods.
+
+    default:
+      return false;
+  }
+}
+
 enum dactyl_layers {
   _QWERTY,
   _LOWER,
@@ -74,30 +88,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_LCTL, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   ,                        KC_N   , KC_M   , KC_COMM, KC_DOT , SE_SLSH, SE_MINS,
                        KC_EXLM, KC_QSM ,                                                            SE_PLUS, SE_EQL ,
                                                   RAISE  , KC_ENT ,      KC_SPC , LOWER  ,
-                                                  _______, KC_BSPC,      KC_BSPC, KC_DEL ,
+                                                  _______, KC_DEL ,      KC_BSPC, _______,
                                                   _______, _______,      _______, _______
   ),
 
   [_LOWER] = LAYOUT_5x6(
      SE_TILD, KC_EXLM,  SE_AT , KC_HASH, SE_DLR , KC_PERC,                        SE_CIRC, SE_AMPR, SE_ASTR, SE_SLSH, SE_LPRN, SE_RPRN,
-     SE_ACUT, _______, _______, _______, _______, _______,                        _______, _______, KC_UP  , _______, SE_LCBR, SE_RCBR,
-     _______, _______, _______, _______, _______, _______,                        _______, KC_LEFT, KC_DOWN, KC_RGHT, SE_LBRC, SE_RBRC,
+     SE_ACUT, _______, _______, _______, _______, _______,                        _______, _______, _______, _______, SE_LCBR, SE_RCBR,
+     _______, _______, _______, _______, _______, _______,                        _______, _______, _______, _______, SE_LBRC, SE_RBRC,
      _______, _______, _______, _______, _______, _______,                        _______, _______, _______, _______, SE_LABK, SE_RABK,
                        _______, _______,                                                            _______, _______,
                                                   _______, _______,      _______, _______,
                                                   _______, _______,      _______, _______,
-                                                  _______, _______,      _______, _______
+                                                  _______, _______,      _______, QK_BOOT
 
   ),
 
   [_RAISE] = LAYOUT_5x6(
      KC_F12 , KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,                        KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 ,
-     _______, _______, _______, _______, QK_BOOT, _______,                        KC_PGUP, KC_HOME, KC_UP  , KC_END , KC_MUTE, SE_PIPE,
-     _______, KC_PGDN, KC_PGUP, KC_END , _______, _______,                        KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_VOLU, SE_BSLS,
-     _______, KC_MPLY, KC_MPRV, KC_MNXT, _______, _______,                        _______, _______, _______, _______, KC_VOLD, _______,
+     _______, _______, _______, _______, _______, _______,                        KC_PGUP, KC_HOME, KC_UP  , KC_END , KC_MUTE, SE_PIPE,
+     _______, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _______,                        KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_VOLU, SE_BSLS,
+     _______, _______, _______, _______, _______, _______,                        _______, _______, _______, _______, KC_VOLD, _______,
                        _______, _______,                                                            _______, _______, 
                                                   _______, _______,      _______, _______,
                                                   _______, _______,      _______, _______,
-                                                  _______, _______,      _______, _______
+                                                  QK_BOOT, _______,      _______, _______
   ),
 };
