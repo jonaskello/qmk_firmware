@@ -22,3 +22,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define MASTER_RIGHT
 //#define EE_HANDS
 // Rows are doubled-up
+
+// // Configure the global tapping term (default: 200ms)
+// #define TAPPING_TERM 300
+
+// Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
+#define QUICK_TAP_TERM 0
+
+//This makes tap and hold keys (like Layer Tap) work better for fast typists, or for high TAPPING_TERM settings.
+#define PERMISSIVE_HOLD
