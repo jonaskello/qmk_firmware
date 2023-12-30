@@ -97,7 +97,6 @@ enum dactyl_layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-
     [_QWERTY] = LAYOUT_5x6(
      _______, _______, _______, _______, _______, _______,                        _______, _______, _______, _______, _______, _______,
      KC_ESC , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T   ,                        KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , SE_ARNG,
