@@ -11,10 +11,58 @@ enum dactyl_layers {
 
 #define RAISE  MO(_RAISE)
 #define LOWER  MO(_LOWER)
-#define KC_QSM LSFT(SE_PLUS)
-
+// #define RAI_DEL LT(_RAISE, KC_DEL)
+// #define LOW_BSP LT(_LOWER, KC_BSPC)
+// #define RAI_BSP LT(_RAISE, KC_BSPC)
+// #define LOW_DEL LT(_LOWER, KC_DEL)
+// #define LSH_ENT LSFT_T(KC_ENT)
+// #define RSH_SPC RSFT_T(KC_SPC)
 #define LSH_ENT LSFT_T(KC_ENT)
 #define RSH_SPC RSFT_T(KC_SPC)
+#define KC_QSM LSFT(SE_PLUS)
+
+// Shift + Backspace for Delete
+// Initialize variable holding the binary representation of active modifiers.
+uint8_t mod_state;
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    // Store the current modifier state in the variable for later reference
+    mod_state = get_mods();
+    switch (keycode) {
+
+    case KC_BSPC:
+        {
+        // Initialize a boolean variable that keeps track
+        // of the delete key status: registered or not?
+        static bool delkey_registered;
+        if (record->event.pressed) {
+            // Detect the activation of either shift keys
+            if (mod_state & MOD_MASK_SHIFT) {
+                // First temporarily canceling both shifts so that
+                // shift isn't applied to the KC_DEL keycode
+                del_mods(MOD_MASK_SHIFT);
+                register_code(KC_DEL);
+                // Update the boolean variable to reflect the status of KC_DEL
+                delkey_registered = true;
+                // Reapplying modifier state so that the held shift key(s)
+                // still work even after having tapped the Backspace/Delete key.
+                set_mods(mod_state);
+                return false;
+            }
+        } else { // on release of KC_BSPC
+            // In case KC_DEL is still being sent even after the release of KC_BSPC
+            if (delkey_registered) {
+                unregister_code(KC_DEL);
+                delkey_registered = false;
+                return false;
+            }
+        }
+        // Let QMK process the KC_BSPC keycode as usual outside of shift
+        return true;
+    }
+
+    }
+    return true;
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
