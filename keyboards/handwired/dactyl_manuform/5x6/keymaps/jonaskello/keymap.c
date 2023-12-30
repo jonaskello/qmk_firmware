@@ -9,22 +9,29 @@
 #define RAISE  MO(_RAISE)
 #define LOWER  MO(_LOWER)
 #define TERM   LGUI(LSFT(KC_ENT))
-#define ALTTAB LGUI(KC_TAB)
-#define KILL   LGUI(LSFT(KC_C))
-#define OPEN   LGUI(KC_P)
 #define KC_QSM LSFT(SE_PLUS)
 
-// Left-hand home row mods
-#define HOME_A LGUI_T(KC_A)
-#define HOME_S LALT_T(KC_S)
-#define HOME_D LSFT_T(KC_D)
-#define HOME_F LCTL_T(KC_F)
+// Left-hand home row mods - base layer
+#define HM_A LGUI_T(KC_A)
+#define HM_S LALT_T(KC_S)
+#define HM_D LSFT_T(KC_D)
+#define HM_F LCTL_T(KC_F)
+// Right-hand home row mods - base layer
+#define HM_J RCTL_T(KC_J)
+#define HM_K RSFT_T(KC_K)
+#define HM_L LALT_T(KC_L)
+#define HM_OD RGUI_T(SE_ODIA)
 
-// Right-hand home row mods
-#define HOME_J RCTL_T(KC_J)
-#define HOME_K RSFT_T(KC_K)
-#define HOME_L LALT_T(KC_L)
-#define HOME_OD RGUI_T(SE_ODIA)
+// Left-hand home row mods - raise layer
+#define HM_1 LGUI_T(KC_1)
+#define HM_2 LALT_T(KC_2)
+#define HM_3 LSFT_T(KC_3)
+#define HM_4 LCTL_T(KC_4)
+// Right-hand home row mods - raise layer
+#define HM_7 RCTL_T(KC_7)
+#define HM_8 RSFT_T(KC_8)
+#define HM_9 LALT_T(KC_9)
+#define HM_0 RGUI_T(KC_0)
 
 #define ACHORDION_STREAK
 
@@ -61,8 +68,8 @@ bool achordion_chord(uint16_t tap_hold_keycode,
   // Exceptionally consider the following chords as holds, even though they
   // are on the same hand.
   switch (tap_hold_keycode) {
-    case HOME_F:  // CTRL+A, CTRL+S
-      if (other_keycode == HOME_A || other_keycode == HOME_S || other_keycode == KC_Z
+    case HM_F:  // CTRL+A, CTRL+S
+      if (other_keycode == HM_A || other_keycode == HM_S || other_keycode == KC_Z
           || other_keycode == KC_X || other_keycode == KC_C || other_keycode == KC_V) { return true; }
       break;
   }
@@ -100,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT_5x6(
      _______, _______, _______, _______, _______, _______,                        _______, _______, _______, _______, _______, _______,
      KC_ESC , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T   ,                        KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , SE_ARNG,
-     KC_BSPC, HOME_A , HOME_S , HOME_D , HOME_F , KC_G   ,                        KC_H   , HOME_J , HOME_K , HOME_L , HOME_OD, SE_ADIA,
+     KC_BSPC, HM_A   , HM_S   , HM_D   , HM_F   , KC_G   ,                        KC_H   , HM_J   , HM_K   , HM_L   , HM_OD  , SE_ADIA,
      SE_QUOT, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   ,                        KC_N   , KC_M   , KC_COMM, KC_DOT , SE_MINS, SE_PLUS,
                        _______, _______,                                                            _______, _______,
                                                   KC_ENT , RAISE  ,      LOWER  , KC_SPC ,
@@ -111,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_RAISE] = LAYOUT_5x6(
      _______, _______, _______, _______, _______, _______,                        _______, _______, _______, _______, _______, _______,
      SE_PIPE, SE_EXLM, SE_DQUO, SE_HASH, SE_CURR, SE_PERC,                        SE_AMPR, SE_SLSH, SE_LPRN, SE_RPRN, SE_EQL , _______,
-     SE_LABK, KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,                        KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , UD_GRV ,
+     SE_LABK, HM_1   , HM_2   , HM_3   , HM_4   , KC_5   ,                        KC_6   , HM_7   , HM_8   , HM_9   , HM_0   , UD_GRV ,
      _______, _______, SE_AT  , SE_TILD, SE_DLR, SE_BSLS ,                        _______, SE_LCBR, SE_LBRC, SE_RBRC, SE_RCBR, _______,
                        _______, _______,                                                            _______, _______,
                                                   _______, _______,      _______, _______,
