@@ -119,7 +119,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      _______, _______, _______, _______, _______, _______,                        _______, _______, _______, _______, _______, _______,
      SE_PIPE, SE_EXLM, SE_DQUO, SE_HASH, SE_CURR, SE_PERC,                        SE_AMPR, SE_SLSH, SE_LPRN, SE_RPRN, SE_EQL , _______,
      SE_LABK, HM_1   , HM_2   , HM_3   , HM_4   , KC_5   ,                        KC_6   , HM_7   , HM_8   , HM_9   , HM_0   , UD_GRV ,
-     _______, _______, SE_AT  , SE_TILD, SE_DLR, SE_BSLS ,                        _______, SE_LCBR, SE_LBRC, SE_RBRC, SE_RCBR, _______,
+     SE_RABK, _______, SE_AT  , SE_TILD, SE_DLR, SE_BSLS ,                        _______, SE_LCBR, SE_LBRC, SE_RBRC, SE_RCBR, _______,
                        _______, _______,                                                            _______, _______,
                                                   _______, _______,      _______, _______,
                                                   _______, _______,      _______, _______,
