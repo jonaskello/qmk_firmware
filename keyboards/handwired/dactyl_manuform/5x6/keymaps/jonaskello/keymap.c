@@ -129,8 +129,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_RAISE] = LAYOUT_5x6(
      _______, _______, _______, _______, _______, _______,                        _______, _______, _______, _______, _______, _______,
      SE_PIPE, SE_EXLM, SE_DQUO, SE_HASH, SE_CURR, SE_PERC,                        _______, KC_7   , KC_8   , KC_9   , _______, UD_GRV ,
-     _______, SE_LCBR, SE_LBRC, SE_RBRC, SE_RCBR, _______,                        KC_0   , HM_4   , HM_5   , HM_6   , _______, _______,
-     _______, SE_AMPR, SE_SLSH, SE_LPRN, SE_RPRN, SE_EQL ,                        SE_LABK, KC_1   , KC_2   , KC_3   , _______, _______,
+     SE_AMPR, SE_LCBR, SE_RCBR, SE_LBRC, SE_RBRC, _______,                        KC_0   , HM_4   , HM_5   , HM_6   , _______, _______,
+     SE_SLSH, SE_LABK, SE_RABK, SE_LPRN, SE_RPRN, SE_EQL ,                        SE_LABK, KC_1   , KC_2   , KC_3   , _______, _______,
                        _______, _______,                                                            _______, _______,
                                                   _______, _______,      _______, _______,
                                                   _______, _______,      _______, _______,
